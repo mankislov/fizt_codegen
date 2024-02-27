@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Генератор кода для клоунов</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f4f4f4;
+    }
+    #container {
+        text-align: left;
+    }
+    #output {
+        width: 400px;
+        min-height: 200px;
+        height: auto;
+        margin-bottom: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+        overflow-wrap: break-word;
+        white-space: pre-wrap; /* Preserve line breaks and spaces */
+    }
+    button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        transition: background-color 0.3s, transform 0.3s ease-out; /* Added transform property for scaling */
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    button:active {
+        transform: scale(0.95); /* Scale down when button is pressed */
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div id="output"></div>
+    <button onclick="generateString()">генерировать</button>
+    <button onclick="copyToClipboard()" id="copyButton" style="display: none;">скопировать</button>
+</div>
+
+<script>
+function generateString() {
+    var strings = [
+        [
+            "#include &lt;iostream&gt;<br>",
+            "using namespace std;<br>",
+            "int main(){<br>",
+            "    int n,t;<br>",
+            "    cin &gt;&gt; n;<br>",
+            "    int spd=50;<br>",
+            "    t=(n/spd)*60*60;<br>",
+            "    cout &lt;&lt; 'дней: ' &lt;&lt; t/60/60/24 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'часов: ' &lt;&lt; t/60/60%24 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'минут: ' &lt;&lt; t/60%60 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'секунд: ' &lt;&lt; t%60 &lt;&lt; endl;<br>",
+            "}<br>",
+        ],
+        [
+            "#include &lt;iostream&gt;<br>",
+            "using namespace std;<br>",
+            "int main() {<br>",
+            "    int d, t;<br>",
+            "    cin &gt;&gt; d;<br>",
+            "    int v = 50;<br>",
+            "    t = (d / v) * 60 * 60;<br>",
+            "    cout &lt;&lt; 'дней: ' &lt;&lt; t/60/60/24 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'часов: ' &lt;&lt; t/60/60 % 24 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'минут: ' &lt;&lt; t/60 % 60 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'секунд: ' &lt;&lt; t % 60 &lt;&lt; endl;<br>",
+            "    return 0;<br>",
+            "}<br>",
+        ],
+        [
+            "#include &lt;iostream&gt;<br>",
+            "using namespace std;<br>",
+            "int main(){<br>",
+            "    int m,r;<br>",
+            "    cin &gt;&gt; m;<br>",
+            "    int v=50;<br>",
+            "    t = (m/v)*60*60;<br>",
+            "    cout &lt;&lt; 'дней: ' &lt;&lt; t / 60 / 60 / 24 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'часов: ' &lt;&lt; t / 60 / 60 % 24 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'минут: ' &lt;&lt; t / 60 % 60 &lt;&lt; endl;<br>",
+            "    cout &lt;&lt; 'секунд: ' &lt;&lt; t % 60 &lt;&lt; endl;<br>",
+            "    return 0;<br>",
+            "}<br>",
+        ]
+    ];
+    var randomIndex = Math.floor(Math.random() * strings.length);
+    var randomString = strings[randomIndex].join('');
+    document.getElementById("output").innerHTML = randomString;
+    document.getElementById("copyButton").style.display = "inline-block";
+}
+
+function copyToClipboard() {
+    var textToCopy = document.getElementById("output").innerText;
+    var dummyTextarea = document.createElement("textarea");
+    dummyTextarea.value = textToCopy;
+    document.body.appendChild(dummyTextarea);
+    dummyTextarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(dummyTextarea);
+}
+</script>
+</body>
+</html>
